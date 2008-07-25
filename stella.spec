@@ -1,6 +1,6 @@
 Name:           stella
 Version:        2.6.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -80,6 +80,9 @@ fi
 
 
 %changelog
+* Fri Jul 25 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 2.6.1-2
+- Release bump for rpmfusion
+
 * Mon Jun  2 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 2.6.1-1
 - New upstream release 2.6.1
 
