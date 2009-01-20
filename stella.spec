@@ -1,12 +1,11 @@
 Name:           stella
-Version:        2.6.1
-Release:        2%{?dist}
+Version:        2.7
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            http://stella.sourceforge.net
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
-Patch0:         stella-2.6.1-gcc43.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  SDL-devel libpng-devel desktop-file-utils
 %ifarch %{ix86}
@@ -23,7 +22,6 @@ favorite old Atari 2600 games in GNU/Linux.
 
 %prep
 %setup -q
-%patch0 -p1
 sed -i 's|$(INSTALL) -c -s -m 755|$(INSTALL) -c -m 755|g' Makefile
 sed -i 's|-fomit-frame-pointer||g' Makefile
 
@@ -80,6 +78,10 @@ fi
 
 
 %changelog
+* Tue Jan 20 2009 Hans de Goede <j.w.r.degoede@hhs.nl> 2.7-1
+- New upstream release 2.7
+- Drop upstreamed patches
+
 * Fri Jul 25 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 2.6.1-2
 - Release bump for rpmfusion
 
