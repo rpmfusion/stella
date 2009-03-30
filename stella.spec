@@ -1,6 +1,6 @@
 Name:           stella
-Version:        2.7.3
-Release:        2%{?dist}
+Version:        2.7.5
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -78,6 +78,9 @@ fi
 
 
 %changelog
+* Sun Mar 29 2009 Hans de Goede <j.w.r.degoede@hhs.nl> 2.7.5-1
+- New upstream release 2.7.5
+
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.7.3-2
 - rebuild for new F11 features
 
