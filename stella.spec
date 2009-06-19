@@ -1,5 +1,5 @@
 Name:           stella
-Version:        2.7.6
+Version:        2.8.1
 Release:        1%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
@@ -78,6 +78,9 @@ fi
 
 
 %changelog
+* Fri Jun 19 2009 Hans de Goede <j.w.r.degoede@hhs.nl> 2.8.1-1
+- New upstream release 2.8.1
+
 * Wed Apr 15 2009 Hans de Goede <j.w.r.degoede@hhs.nl> 2.7.6-1
 - New upstream release 2.7.6
 
