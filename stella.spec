@@ -1,6 +1,6 @@
 Name:           stella
 Version:        3.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -78,6 +78,9 @@ fi
 
 
 %changelog
+* Fri Oct 15 2010 Nicolas Chauvet <kwizart@gmail.com> - 3.2.1-2
+- Rebuilt for gcc bug
+
 * Thu Sep  9 2010 Hans de Goede <j.w.r.degoede@hhs.nl> 3.2.1-1
 - New upstream release 3.2.1
 
