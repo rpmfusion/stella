@@ -1,12 +1,11 @@
 Name:           stella
-Version:        3.2.1
-Release:        2%{?dist}
+Version:        3.4.1
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            http://stella.sourceforge.net
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  SDL-devel libpng-devel desktop-file-utils
 %ifarch %{ix86}
 BuildRequires:  nasm
@@ -35,7 +34,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT DOCDIR=%{_datadir}/doc/%{name}-%{version}
 # remove icon from pre fdo locations
 rm $RPM_BUILD_ROOT%{_datadir}/icons/{mini,large,}/%{name}.png
@@ -52,21 +50,17 @@ install -p -m 644 src/common/%{name}.png \
   $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/32x32/apps
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %post
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
@@ -78,6 +72,9 @@ fi
 
 
 %changelog
+* Wed Jul 20 2011 Hans de Goede <j.w.r.degoede@gmail.com> - 3.4.1-1
+- New upstream release 3.4.1
+
 * Fri Oct 15 2010 Nicolas Chauvet <kwizart@gmail.com> - 3.2.1-2
 - Rebuilt for gcc bug
 
