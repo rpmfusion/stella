@@ -1,6 +1,6 @@
 Name:           stella
 Version:        3.4.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -72,6 +72,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Feb 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 3.4.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Wed Jul 20 2011 Hans de Goede <j.w.r.degoede@gmail.com> - 3.4.1-1
 - New upstream release 3.4.1
 
