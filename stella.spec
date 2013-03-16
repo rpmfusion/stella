@@ -1,6 +1,6 @@
 Name:           stella
-Version:        3.4.1
-Release:        4%{?dist}
+Version:        3.8.1
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -35,19 +35,14 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT DOCDIR=%{_datadir}/doc/%{name}-%{version}
-# remove icon from pre fdo locations
-rm $RPM_BUILD_ROOT%{_datadir}/icons/{mini,large,}/%{name}.png
-
-# below is the desktop file and icon stuff.
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
+%if 0%{?fedora} && 0%{?fedora} < 19
 desktop-file-install --vendor dribble           \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-  --remove-category Application                 \
   --delete-original                             \
   $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/32x32/apps
-install -p -m 644 src/common/%{name}.png \
-  $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/32x32/apps
+%else
+desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
+%endif
 
 
 %post
@@ -64,14 +59,16 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
-%defattr(-,root,root,-)
 %doc %{_datadir}/doc/%{name}-%{version}
 %{_bindir}/%{name}
-%{_datadir}/applications/dribble-%{name}.desktop
-%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%{_datadir}/applications/*%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 
 %changelog
+* Sat Mar 16 2013 Hans de Goede <j.w.r.degoede@gmail.com> - 3.8.1-1
+- New upstream release 3.8.1
+
 * Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 3.4.1-4
 - Mass rebuilt for Fedora 19 Features
 
