@@ -1,6 +1,6 @@
 Name:           stella
 Version:        3.8.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Summary:        Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -66,6 +66,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 3.8.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Sat Mar 16 2013 Hans de Goede <j.w.r.degoede@gmail.com> - 3.8.1-1
 - New upstream release 3.8.1
 
