@@ -1,49 +1,54 @@
 Name:           stella
-Version:        3.8.1
-Release:        2%{?dist}
+Version:        4.6.1
+Release:        1%{?dist}
 License:        GPLv2+
-Summary:        Atari 2600 Video Computer System emulator
+Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            http://stella.sourceforge.net
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
-BuildRequires:  SDL-devel libpng-devel desktop-file-utils
-%ifarch %{ix86}
-BuildRequires:  nasm
-%endif
+
+BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
+BuildRequires:  desktop-file-utils
 Requires:       hicolor-icon-theme
 
 %description
-The Atari 2600 Video Computer System (VCS), introduced in 1977, was
-the most popular home video game system of the early 1980's. This
-emulator will run most Atari ROM images, so that you can play your
-favorite old Atari 2600 games in GNU/Linux.
+The Atari 2600 Video Computer System (VCS), introduced in 1977, was the most
+popular home video game system of the early 1980's.  Now you can enjoy all of
+your favorite Atari 2600 games on your PC thanks to Stella!
 
+Stella is a multi-platform Atari 2600 VCS emulator released under the GNU
+General Public License (GPL). Stella was originally developed for Linux by
+Bradford W. Mott, and is currently maintained by Stephen Anthony. Since its
+original release several people have joined the development team to port Stella
+to other operating systems such as AcornOS, AmigaOS, DOS, FreeBSD, IRIX, Linux,
+OS/2, MacOS, Unix, and Windows. The development team is working hard to perfect
+the emulator and we hope you enjoy our effort.
+
+Stella is now DonationWare. Please help to encourage further Stella development
+by considering a contribution.
 
 %prep
 %setup -q
-sed -i 's|$(INSTALL) -c -s -m 755|$(INSTALL) -c -m 755|g' Makefile
-sed -i 's|-fomit-frame-pointer||g' Makefile
+rm src/zlib src/libpng -rf
+sed -i "s/-c -s -m/-m/" Makefile
 
 
 %build
-export CXXFLAGS=$RPM_OPT_FLAGS
-# this is not a real configure script, so do NOT use %%configure
-# the --libdir is not used but still added to shutup rpmlint
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
+# Not an autotools configure script :/
+CFLAGS="%{optflags}"; export CFLAGS;
+CXXFLAGS="%{optflags}"; export CXXFLAGS;
+LDFLAGS="${LDFLAGS:--Wl,-z,relro }"; export LDFLAGS;
+
+./configure --prefix=%{_prefix} --bindir=%{_bindir} --datadir=%{_datadir} --docdir=%{_docdir}/%{name}
 make %{?_smp_mflags}
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT DOCDIR=%{_datadir}/doc/%{name}-%{version}
-%if 0%{?fedora} && 0%{?fedora} < 19
-desktop-file-install --vendor dribble           \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-  --delete-original                             \
-  $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
-%else
-desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
-%endif
+%make_install
 
+sed -i 's/\r$//' $RPM_BUILD_ROOT/%{_docdir}/%{name}/README-SDL.txt
+
+desktop-file-validate $RPM_BUILD_ROOT/%{_datadir}/applications/%{name}.desktop
 
 %post
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
@@ -57,15 +62,17 @@ fi
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
-
 %files
-%doc %{_datadir}/doc/%{name}-%{version}
+%doc %{_docdir}/%{name}/
 %{_bindir}/%{name}
-%{_datadir}/applications/*%{name}.desktop
+%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 
 %changelog
+* Fri May 08 2015 Sérgio Basto <sergio@serjux.com> - 4.6.1-1
+- Merged Ankur Sinha spec's, package review rhbz #1215345 .
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 3.8.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
