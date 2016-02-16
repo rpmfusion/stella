@@ -1,11 +1,11 @@
 Name:           stella
-Version:        4.6.7
+Version:        4.7.1
 Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            http://stella.sourceforge.net
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.xz
 
 BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
 BuildRequires:  desktop-file-utils
@@ -46,9 +46,14 @@ make %{?_smp_mflags}
 %install
 %make_install
 
-sed -i 's/\r$//' $RPM_BUILD_ROOT/%{_docdir}/%{name}/README-SDL.txt
+sed -i 's/\r$//' %{buildroot}/%{_docdir}/%{name}/README-SDL.txt
 
-desktop-file-validate $RPM_BUILD_ROOT/%{_datadir}/applications/%{name}.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
+
+# Remove License.txt and Copyright.txt from docdir
+# files will be installed in license dir
+rm %{buildroot}/%{_docdir}/%{name}/License.txt
+rm %{buildroot}/%{_docdir}/%{name}/Copyright.txt
 
 %post
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
@@ -64,12 +69,17 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %doc %{_docdir}/%{name}/
+%license  Copyright.txt License.txt
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 
 %changelog
+* Mon Feb 15 2016 Sérgio Basto <sergio@serjux.com> - 4.7.1-1
+- Update to 4.7.1
+- Add license tag.
+
 * Wed Nov 18 2015 Sérgio Basto <sergio@serjux.com> - 4.6.7-1
 - Update stella to 4.6.7
 
