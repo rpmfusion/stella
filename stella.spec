@@ -1,5 +1,5 @@
 Name:           stella
-Version:        4.7.2
+Version:        4.7.3
 Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
@@ -76,6 +76,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Nov 22 2016 Sérgio Basto <sergio@serjux.com> - 4.7.3-1
+- New upstream release, 4.7.3
+
 * Tue Apr 12 2016 Sérgio Basto <sergio@serjux.com> - 4.7.2-1
 - Update Stella to 4.7.2
 
