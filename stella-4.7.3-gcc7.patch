@@ -1,0 +1,12 @@
+diff -durN stella-4.7.3.orig/configure stella-4.7.3/configure
+--- stella-4.7.3.orig/configure	2016-10-10 19:43:31.000000000 +0200
++++ stella-4.7.3/configure	2017-04-17 11:12:59.158157722 +0200
+@@ -420,7 +420,7 @@
+ 	fi
+ 
+ 	case $cxx_version in
+-		4.[7-9]|4.[7-9].[0-9]|4.[7-9].[0-9][-.]*|[5-6].[0-9]|[5-6].[0-9].[0-9]|[5-6].[0-9].[0-9][-.]*)
++		4.[7-9]|4.[7-9].[0-9]|4.[7-9].[0-9][-.]*|[5-7]|[5-7].[0-9]|[5-7].[0-9].[0-9]|[5-7].[0-9].[0-9][-.]*)
+ 			_cxx_major=`echo $cxx_version | cut -d '.' -f 1`
+ 			_cxx_minor=`echo $cxx_version | cut -d '.' -f 2`
+ 			cxx_version="$cxx_version, ok"
