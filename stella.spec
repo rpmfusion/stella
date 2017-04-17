@@ -1,11 +1,12 @@
 Name:           stella
 Version:        4.7.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
-URL:            http://stella.sourceforge.net
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.xz
+URL:            https://stella-emu.github.io/
+Source0:        https://github.com/stella-emu/%{name}/releases/download/release-%{version}/%{name}-%{version}-src.tar.xz
+Patch0:         %{name}-4.7.3-gcc7.patch
 
 BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
 BuildRequires:  desktop-file-utils
@@ -29,6 +30,7 @@ by considering a contribution.
 
 %prep
 %setup -q
+%patch0 -p1
 rm src/zlib src/libpng -rf
 sed -i "s/-c -s -m/-m/" Makefile
 
@@ -76,6 +78,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Apr 17 2017 Andrea Musuruane <musuruan@gmail.com> - 4.7.3-3
+- Fix FTBFS with gcc7
+- Updated URL and Source0
+
 * Mon Mar 20 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 4.7.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
