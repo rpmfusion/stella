@@ -34,7 +34,7 @@ by considering a contribution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch1 -p2
+%patch2 -p2
 rm  -rf src/zlib src/libpng
 sed -i "s/-c -s -m/-m/" Makefile
 
