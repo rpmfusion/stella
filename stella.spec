@@ -8,6 +8,7 @@ URL:            https://stella-emu.github.io/
 Source0:        https://github.com/stella-emu/%{name}/releases/download/release-%{version}/%{name}-%{version}-src.tar.xz
 Patch0:         %{name}-4.7.3-gcc7.patch
 Patch1:         1dd8c04f6813779e509fa7427b06bbc47d408329.patch
+Patch2:         38deb5b1cfdce8b86a49c71cd7ce34a8fafd3884.patch
 
 BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
 BuildRequires:  desktop-file-utils
@@ -33,6 +34,7 @@ by considering a contribution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch1 -p2
 rm  -rf src/zlib src/libpng
 sed -i "s/-c -s -m/-m/" Makefile
 
@@ -85,6 +87,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 - Updated URL and Source0
 - Add upstream patch (https://github.com/stella-emu/stella/issues/117) try fix
   aarch64 detection.
+- Add another upstream patch, potential fix for compile failure on ppc64le / SDL2.
 
 * Mon Mar 20 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 4.7.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild

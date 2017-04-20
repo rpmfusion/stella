@@ -1,0 +1,129 @@
+From 38deb5b1cfdce8b86a49c71cd7ce34a8fafd3884 Mon Sep 17 00:00:00 2001
+From: Stephen Anthony <sa666666@gmail.com>
+Date: Thu, 20 Apr 2017 15:21:55 -0230
+Subject: [PATCH] Potential fix for compile failure on ppc64le / SDL2.
+
+---
+ src/common/EventHandlerSDL2.hxx |  2 +-
+ src/common/FrameBufferSDL2.cxx  |  2 +-
+ src/common/FrameBufferSDL2.hxx  |  2 +-
+ src/common/SDL_lib.hxx          | 24 ++++++++++++++++++++++++
+ src/common/SoundSDL2.cxx        |  2 +-
+ src/common/SoundSDL2.hxx        |  2 +-
+ src/common/StellaKeys.hxx       |  2 +-
+ 7 files changed, 30 insertions(+), 6 deletions(-)
+ create mode 100644 src/common/SDL_lib.hxx
+
+diff --git a/src/common/EventHandlerSDL2.hxx b/src/common/EventHandlerSDL2.hxx
+index 8ecc6f9..591d878 100644
+--- a/src/common/EventHandlerSDL2.hxx
++++ b/src/common/EventHandlerSDL2.hxx
+@@ -18,7 +18,7 @@
+ #ifndef EVENTHANDLER_SDL2_HXX
+ #define EVENTHANDLER_SDL2_HXX
+ 
+-#include <SDL.h>
++#include "SDL_lib.hxx"
+ #include "EventHandler.hxx"
+ 
+ /**
+diff --git a/src/common/FrameBufferSDL2.cxx b/src/common/FrameBufferSDL2.cxx
+index ce50172..4880d67 100644
+--- a/src/common/FrameBufferSDL2.cxx
++++ b/src/common/FrameBufferSDL2.cxx
+@@ -15,11 +15,11 @@
+ // this file, and for a DISCLAIMER OF ALL WARRANTIES.
+ //============================================================================
+ 
+-#include <SDL.h>
+ #include <sstream>
+ #include <time.h>
+ #include <fstream>
+ 
++#include "SDL_lib.hxx"
+ #include "bspf.hxx"
+ 
+ #include "Console.hxx"
+diff --git a/src/common/FrameBufferSDL2.hxx b/src/common/FrameBufferSDL2.hxx
+index 7bed5bc..d06cb24 100644
+--- a/src/common/FrameBufferSDL2.hxx
++++ b/src/common/FrameBufferSDL2.hxx
+@@ -18,7 +18,7 @@
+ #ifndef FRAMEBUFFER_SDL2_HXX
+ #define FRAMEBUFFER_SDL2_HXX
+ 
+-#include <SDL.h>
++#include "SDL_lib.hxx"
+ 
+ class OSystem;
+ class FBSurfaceSDL2;
+diff --git a/src/common/SDL_lib.hxx b/src/common/SDL_lib.hxx
+new file mode 100644
+index 0000000..2981dfb
+--- /dev/null
++++ b/src/common/SDL_lib.hxx
+@@ -0,0 +1,24 @@
++//============================================================================
++//
++//   SSSS    tt          lll  lll
++//  SS  SS   tt           ll   ll
++//  SS     tttttt  eeee   ll   ll   aaaa
++//   SSSS    tt   ee  ee  ll   ll      aa
++//      SS   tt   eeeeee  ll   ll   aaaaa  --  "An Atari 2600 VCS Emulator"
++//  SS  SS   tt   ee      ll   ll  aa  aa
++//   SSSS     ttt  eeeee llll llll  aaaaa
++//
++// Copyright (c) 1995-2017 by Bradford W. Mott, Stephen Anthony
++// and the Stella Team
++//
++// See the file "License.txt" for information on usage and redistribution of
++// this file, and for a DISCLAIMER OF ALL WARRANTIES.
++//============================================================================
++
++#ifndef SDL_LIB_HXX
++#define SDL_LIB_HXX
++
++#include <SDL.h>
++#undef bool  // Seems to be needed for ppc64le, doesn't hurt other archs
++
++#endif
+diff --git a/src/common/SoundSDL2.cxx b/src/common/SoundSDL2.cxx
+index 7658d81..439f73b 100644
+--- a/src/common/SoundSDL2.cxx
++++ b/src/common/SoundSDL2.cxx
+@@ -20,8 +20,8 @@
+ #include <sstream>
+ #include <cassert>
+ #include <cmath>
+-#include <SDL.h>
+ 
++#include "SDL_lib.hxx"
+ #include "TIASnd.hxx"
+ #include "TIATypes.hxx"
+ #include "FrameBuffer.hxx"
+diff --git a/src/common/SoundSDL2.hxx b/src/common/SoundSDL2.hxx
+index 6d62785..5d186a5 100644
+--- a/src/common/SoundSDL2.hxx
++++ b/src/common/SoundSDL2.hxx
+@@ -22,7 +22,7 @@
+ 
+ class OSystem;
+ 
+-#include <SDL.h>
++#include "SDL_lib.hxx"
+ 
+ #include "bspf.hxx"
+ #include "TIASnd.hxx"
+diff --git a/src/common/StellaKeys.hxx b/src/common/StellaKeys.hxx
+index efe2349..b9e6dc9 100644
+--- a/src/common/StellaKeys.hxx
++++ b/src/common/StellaKeys.hxx
+@@ -18,7 +18,7 @@
+ #ifndef STELLA_KEYS_HXX
+ #define STELLA_KEYS_HXX
+ 
+-#include <SDL.h>
++#include "SDL_lib.hxx"
+ 
+ /**
+   This class implements a thin wrapper around the SDL keysym enumerations,
