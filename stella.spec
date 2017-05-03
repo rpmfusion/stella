@@ -1,15 +1,15 @@
+%global prerel pre7
 Name:           stella
-Version:        4.7.3
-Release:        3%{?dist}
+Version:        5.0.0
+Release:        0.1%{?prerel:.%{prerel}}%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            https://stella-emu.github.io/
-Source0:        https://github.com/stella-emu/%{name}/releases/download/release-%{version}/%{name}-%{version}-src.tar.xz
-Patch0:         %{name}-4.7.3-gcc7.patch
-Patch1:         1dd8c04f6813779e509fa7427b06bbc47d408329.patch
+#Source0:        https://github.com/stella-emu/%{name}/releases/download/release-%{version}/%{name}-%{version}-src.tar.xz
+Source0: https://github.com/stella-emu/%{name}/archive/%{version}%{?prerel:-%{prerel}}/%{name}-%{version}%{?prerel:-%{prerel}}.tar.gz
 
-ExcludeArch:    ppc64 ppc64le
+#ExcludeArch:    %{power64}
 
 BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
 BuildRequires:  desktop-file-utils
@@ -32,10 +32,8 @@ Stella is now DonationWare. Please help to encourage further Stella development
 by considering a contribution.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
-rm  -rf src/zlib src/libpng
+%setup -q -n %{name}-%{version}%{?prerel:-%{prerel}}
+rm  -r src/zlib src/libpng
 sed -i "s/-c -s -m/-m/" Makefile
 
 
@@ -82,6 +80,11 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed May 03 2017 Sérgio Basto <sergio@serjux.com> - 5.0.0-0.1.pre7
+- Author ask to build this: https://github.com/stella-emu/stella/issues/117
+    should support ppc64 and ppc64le arches.
+- Drop all patches, they are upstreamed.
+
 * Mon Apr 17 2017 Andrea Musuruane <musuruan@gmail.com> - 4.7.3-3
 - Fix FTBFS with gcc7
 - Updated URL and Source0
