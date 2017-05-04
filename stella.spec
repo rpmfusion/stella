@@ -8,6 +8,7 @@ Group:          Applications/Emulators
 URL:            https://stella-emu.github.io/
 #Source0:        https://github.com/stella-emu/%{name}/releases/download/release-%{version}/%{name}-%{version}-src.tar.xz
 Source0: https://github.com/stella-emu/%{name}/archive/%{version}%{?prerel:-%{prerel}}/%{name}-%{version}%{?prerel:-%{prerel}}.tar.gz
+Patch0:         684c227381fe0d9cece3bfeed0f37eebab05404c.diff
 
 #ExcludeArch:    %{power64}
 
@@ -33,6 +34,7 @@ by considering a contribution.
 
 %prep
 %setup -q -n %{name}-%{version}%{?prerel:-%{prerel}}
+%patch0 -p1
 rm  -r src/zlib src/libpng
 sed -i "s/-c -s -m/-m/" Makefile
 
