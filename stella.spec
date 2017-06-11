@@ -1,7 +1,7 @@
-%global prerel pre7
+%global prerel pre9
 Name:           stella
 Version:        5.0.0
-Release:        0.1%{?prerel:.%{prerel}}%{?dist}
+Release:        0.2%{?prerel:.%{prerel}}%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -82,6 +82,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Jun 11 2017 Sérgio Basto <sergio@serjux.com> - 5.0.0-0.2.pre9
+- Update Stella to 5.0.0-pre9
+
 * Wed May 03 2017 Sérgio Basto <sergio@serjux.com> - 5.0.0-0.1.pre7
 - Author ask to build this: https://github.com/stella-emu/stella/issues/117
     should support ppc64 and ppc64le arches.
