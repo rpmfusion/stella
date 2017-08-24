@@ -1,7 +1,7 @@
-%global prerel pre9
+#global prerel pre9
 Name:           stella
-Version:        5.0.0
-Release:        0.2%{?prerel:.%{prerel}}%{?dist}
+Version:        5.0.2
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -80,6 +80,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Thu Aug 24 2017 Sérgio Basto <sergio@serjux.com> - 5.0.2-1
+- Update stella to 5.0.2
+
 * Sun Jun 11 2017 Sérgio Basto <sergio@serjux.com> - 5.0.0-0.2.pre9
 - Update Stella to 5.0.0-pre9
 - Drop backported patch.
