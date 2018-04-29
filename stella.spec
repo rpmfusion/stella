@@ -32,7 +32,7 @@ Stella is now DonationWare. Please help to encourage further Stella development
 by considering a contribution.
 
 %prep
-%setup -q -n %{name}-%{version}%{?prerel:-%{prerel}}
+%setup -q -n %{name}-%{version}%{?prerel:-%{prerel}}-src
 rm  -r src/zlib src/libpng
 sed -i "s/-c -s -m/-m/" Makefile
 
