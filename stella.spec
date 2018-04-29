@@ -1,13 +1,13 @@
 #global prerel pre9
 Name:           stella
-Version:        5.0.2
-Release:        2%{?dist}
+Version:        5.1.1
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            https://stella-emu.github.io/
-#Source0:        https://github.com/stella-emu/%{name}/releases/download/release-%{version}/%{name}-%{version}-src.tar.xz
-Source0: https://github.com/stella-emu/%{name}/archive/%{version}%{?prerel:-%{prerel}}/%{name}-%{version}%{?prerel:-%{prerel}}.tar.gz
+Source0:        https://github.com/stella-emu/%{name}/releases/download/%{version}/%{name}-%{version}-src.tar.xz
+#Source0:        https://github.com/stella-emu/%{name}/archive/%{version}%{?prerel:-%{prerel}}/%{name}-%{version}%{?prerel:-%{prerel}}.tar.gz
 
 #ExcludeArch:    %{power64}
 
@@ -80,6 +80,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Apr 29 2018 Sérgio Basto <sergio@serjux.com> - 5.1.1-1
+- Update 5.1.1
+
 * Thu Mar 01 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 5.0.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
