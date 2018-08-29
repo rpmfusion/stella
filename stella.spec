@@ -1,7 +1,7 @@
 #global prerel pre9
 Name:           stella
-Version:        5.1.1
-Release:        3%{?dist}
+Version:        5.1.3
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -80,6 +80,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Aug 29 2018 Sérgio Basto <sergio@serjux.com> - 5.1.3-1
+- Update to 5.1.3
+
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 5.1.1-3
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
