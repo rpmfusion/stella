@@ -11,6 +11,7 @@ Source0:        https://github.com/stella-emu/%{name}/releases/download/%{versio
 
 #ExcludeArch:    %{power64}
 
+BuildRequires:  gcc-c++
 BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
 BuildRequires:  desktop-file-utils
 Requires:       hicolor-icon-theme
@@ -82,6 +83,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %changelog
 * Wed Aug 29 2018 Sérgio Basto <sergio@serjux.com> - 5.1.3-1
 - Update to 5.1.3
+- BR gcc-c++
 
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 5.1.1-3
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
