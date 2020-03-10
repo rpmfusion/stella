@@ -1,15 +1,16 @@
 #global prerel pre9
 Name:           stella
-Version:        5.1.3
-Release:        4%{?dist}
+Version:        6.0.2
+Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
 URL:            https://stella-emu.github.io/
 Source0:        https://github.com/stella-emu/%{name}/releases/download/%{version}/%{name}-%{version}-src.tar.xz
-#Source0:        https://github.com/stella-emu/%{name}/archive/%{version}%{?prerel:-%{prerel}}/%{name}-%{version}%{?prerel:-%{prerel}}.tar.gz
+#Source0:       https://github.com/stella-emu/%%{name}/archive/%%{version}%%{?prerel:-%%{prerel}}/%%{name}-%%{version}%%{?prerel:-%%{prerel}}.tar.gz
 
-#ExcludeArch:    %{power64}
+Patch1:         stella-gcc10.patch
+#ExcludeArch:   %%{power64}
 
 BuildRequires:  gcc-c++
 BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
@@ -33,7 +34,7 @@ Stella is now DonationWare. Please help to encourage further Stella development
 by considering a contribution.
 
 %prep
-%setup -q -n %{name}-%{version}%{?prerel:-%{prerel}}
+%autosetup -p1 -n %{name}-%{version}%{?prerel:-%{prerel}}
 rm  -r src/zlib src/libpng
 sed -i "s/-c -s -m/-m/" Makefile
 
@@ -81,6 +82,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Mar 10 2020 Sérgio Basto <sergio@serjux.com> - 6.0.2-1
+- Update to 6.0.2
+
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 5.1.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
