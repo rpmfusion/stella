@@ -1,6 +1,6 @@
 #global prerel pre9
 Name:           stella
-Version:        6.0.2
+Version:        6.1.2
 Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
@@ -9,7 +9,6 @@ URL:            https://stella-emu.github.io/
 Source0:        https://github.com/stella-emu/%{name}/releases/download/%{version}/%{name}-%{version}-src.tar.xz
 #Source0:       https://github.com/stella-emu/%%{name}/archive/%%{version}%%{?prerel:-%%{prerel}}/%%{name}-%%{version}%%{?prerel:-%%{prerel}}.tar.gz
 
-Patch1:         stella-gcc10.patch
 #ExcludeArch:   %%{power64}
 
 BuildRequires:  gcc-c++
@@ -82,6 +81,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue May 26 2020 Sérgio Basto <sergio@serjux.com> - 6.1.2-1
+- Update stella to 6.1.2
+
 * Tue Mar 10 2020 Sérgio Basto <sergio@serjux.com> - 6.0.2-1
 - Update to 6.0.2
 
