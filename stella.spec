@@ -1,7 +1,7 @@
 #global prerel pre9
 Name:           stella
 Version:        6.1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -81,6 +81,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 6.1.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Tue May 26 2020 Sérgio Basto <sergio@serjux.com> - 6.1.2-1
 - Update stella to 6.1.2
 
