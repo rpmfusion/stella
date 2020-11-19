@@ -1,6 +1,6 @@
 #global prerel pre9
 Name:           stella
-Version:        6.2.1
+Version:        6.4
 Release:        1%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
@@ -40,10 +40,7 @@ sed -i "s/-c -s -m/-m/" Makefile
 
 %build
 # Not an autotools configure script :/
-CFLAGS="%{optflags}"; export CFLAGS;
-CXXFLAGS="%{optflags}"; export CXXFLAGS;
-LDFLAGS="${LDFLAGS:--Wl,-z,relro }"; export LDFLAGS;
-
+%{set_build_flags}
 ./configure --prefix=%{_prefix} --bindir=%{_bindir} --datadir=%{_datadir} --docdir=%{_docdir}/%{name}
 make %{?_smp_mflags}
 
@@ -81,6 +78,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Nov 18 2020 Sérgio Basto <sergio@serjux.com> - 6.4-1
+- Update stella to 6.4
+
 * Tue Aug 25 2020 Sérgio Basto <sergio@serjux.com> - 6.2.1-1
 - Update stella to 6.2.1
 
