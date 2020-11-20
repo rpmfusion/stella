@@ -12,7 +12,10 @@ Source0:        https://github.com/stella-emu/%{name}/releases/download/%{versio
 #ExcludeArch:   %%{power64}
 
 BuildRequires:  gcc-c++
-BuildRequires:  libpng-devel zlib-devel bison SDL2-devel
+BuildRequires:  libpng-devel
+BuildRequires:  zlib-devel
+BuildRequires:  bison
+BuildRequires:  SDL2-devel
 BuildRequires:  desktop-file-utils
 Requires:       hicolor-icon-theme
 
@@ -42,7 +45,7 @@ sed -i "s/-c -s -m/-m/" Makefile
 # Not an autotools configure script :/
 %{set_build_flags}
 ./configure --prefix=%{_prefix} --bindir=%{_bindir} --datadir=%{_datadir} --docdir=%{_docdir}/%{name}
-make %{?_smp_mflags}
+%make_build
 
 
 %install
@@ -57,17 +60,6 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
 rm %{buildroot}/%{_docdir}/%{name}/License.txt
 rm %{buildroot}/%{_docdir}/%{name}/Copyright.txt
 
-%post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %doc %{_docdir}/%{name}/
@@ -80,6 +72,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %changelog
 * Wed Nov 18 2020 Sérgio Basto <sergio@serjux.com> - 6.4-1
 - Update stella to 6.4
+- Update spec
 
 * Tue Aug 25 2020 Sérgio Basto <sergio@serjux.com> - 6.2.1-1
 - Update stella to 6.2.1
