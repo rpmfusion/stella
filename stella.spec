@@ -51,14 +51,14 @@ sed -i "s/-c -s -m/-m/" Makefile
 %install
 %make_install
 
-sed -i 's/\r$//' %{buildroot}/%{_docdir}/%{name}/README-SDL.txt
+sed -i 's/\r$//' %{buildroot}%{_docdir}/%{name}/README-SDL.txt
 
-desktop-file-validate %{buildroot}/%{_datadir}/applications/%{name}.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 # Remove License.txt and Copyright.txt from docdir
 # files will be installed in license dir
-rm %{buildroot}/%{_docdir}/%{name}/License.txt
-rm %{buildroot}/%{_docdir}/%{name}/Copyright.txt
+rm %{buildroot}%{_docdir}/%{name}/License.txt
+rm %{buildroot}%{_docdir}/%{name}/Copyright.txt
 
 
 %files
