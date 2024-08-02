@@ -1,7 +1,7 @@
 #global prerel pre9
 Name:           stella
 Version:        6.7
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Summary:        A multi-platform Atari 2600 Video Computer System emulator
 Group:          Applications/Emulators
@@ -70,6 +70,9 @@ rm %{buildroot}%{_docdir}/%{name}/Copyright.txt
 
 
 %changelog
+* Fri Aug 02 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 6.7-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
+
 * Sun Feb 04 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 6.7-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
